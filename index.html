@@ -7,9 +7,17 @@
     <title>Momentum App</title>
   </head>
   <body>
+    <!-- 강의를 듣다가 떠오른 내 생각
+    class selector는 스타일링을 위해 부여하고
+    id selector는 자바스크립트의 active를 위해 부여한다고 
+    생각하면 좋을것같다 -->
+    <!-- html에는 default 값 작성 -->
     <h2 id="clock">00:00:00</h2>
     <!-- form태그에서 id나 class 모두 사용해도 되긴 하지만
     다만 class를 사용하는 경우, 여기서 사용한 class명을 다시 사용하면 안된다 -->
+    <!-- To Do
+      1. 유저에게 정보받기 HTML의 element를 가져온다
+      2. 받은 정보를 화면에 표시한다 -->
     <form class="hidden" id="login-form">
       <input
         required
@@ -19,19 +27,26 @@
       />
       <input type="submit" value="Log In" />
     </form>
+    <!-- 기본동작 막기 test2 -->
+    <a href="https://www.naver.com">Go to Naver</a>
+    <!-- 처음에는 보여지지 않다가 form이 submit되고서 내용을 추가해주려고 함 -->
     <h1 class="hidden" id="greeting"></h1>
     <form id="todo-form">
       <input type="text" placeholder="Write a To Do and Press Enter" required />
     </form>
     <ul id="todo-list"></ul>
+    <!-- 명언을 저장할 자리 만들기 -->
     <div id="quote">
+      <!-- 명언문구 -->
       <span></span>
+      <!-- 사람 -->
       <span></span>
     </div>
     <div id="weather">
       <span></span>
       <span></span>
     </div>
+    <!-- 기능에 따라 javascript 파일 분할 -->
     <script src="js/greetings.js"></script>
     <script src="js/clock.js"></script>
     <script src="js/quotes.js"></script>
@@ -41,8 +56,3 @@
   </body>
 </html>
 
-<!-- 
-To Do
-1. 유저에게 정보받기 HTML의 element를 가져온다
-2. 받은 정보를 화면에 표시한다
- -->

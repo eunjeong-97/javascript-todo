@@ -1,4 +1,6 @@
+// 명언을 array형태로 저장해놓음
 const quotes = [
+  // 각각의 요소는 객체형태로 저장되어있다
   {
     quote: "The way to get started is to quit talking and begin doing.",
     author: "Walt Disney",
@@ -48,3 +50,32 @@ const todaysQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
 quote.innerText = todaysQuote.quote;
 author.innerText = todaysQuote.author;
+
+/* 
+== to do ==
+1. quotes array 안에 있는 element에 접근
+quotes[index].quote
+quotes[index].author
+2. 0-9까지의 숫자를 랜덤하게 주는 function 
+- Math Module 사용하기
+- Math.random(): 0~1사이의 실수를 무작위로 출력
+- Math.random() * 10: 0~10사이의 실수를 무작위로 출력
+- Index는 정수여야 하기 때문에 소수점 삭제
+
+=== 소수점 삭제 ===
+
+1. Math.round() : 반올림
+  - Math.round(1.1) -> 1
+  - Math.round(1.5) -> 2
+2. Math.ceil() : 올림
+  - 숫자를 천장(ceil)까지 높여준다
+  - Math.ceil(1.1) -> 2
+  - Math.ceil(1.0) -> 1
+3. Math.floor() : 내림
+  - 마루(=바닥, floor)까지 숫자를 내려준다
+  - Math.floor(1.01) -> 1
+  - Math.floor(1.9) -> 1
+
+여기서 우리는 9.32442342 -> 10이되면 안되기 때문에
+내림 메서드를 활용 할 것이다
+*/

@@ -139,32 +139,73 @@ function handleLoginBtnClick(event) {
 submit event가 발생했을 때 JavaScript는 handleLoginBtnClick 함수를 호출하고
 이 때 event object를 argument로 주고 우리는 이러한 event object의 기본적인 함수를 통해
 eventListener function의 기본 동작이 실행되는 것을 막아줄 수 있다.
-
 */
 
+const link = document.querySelector("a");
+
+function handleLinkClick(event) {
+  event.preventDefault(); // 기본동작 stop: link에서는 클릭해도 해당페이지로 이동안됨
+  console.log(event);
+  /*
+  이벤트리스너 함수는 내가 실행하는 것이 아니라 브라우저가 실행한다!!!
+  event의 종류가 다양하기 때문에
+  form을 submit했을 때에는 SubmitEvent라고 나왔지만 지금은 MouseEvent라고 나온다
+  MouseEvent는 내가 클릭한 위치의 X,Y좌표를 알려준다
+  유저가 어디를 클릭했는지 알아야 할때 많은 도움이 될 것이다
+  이벤트 종류에 따라 제공하는 정보가 다르다
+  */
+  alert('click!');
+  /* 
+  alert: 모든 동작 STOP!!!
+  이러한 alert는 해당 page가 다른 동작을 하지 못하도록 막고 있어서
+  아무 일도 일어나지 않지만 OK를 눌러서 alert가 없어진다면
+  브라우저의 기본 동작이 실행된다
+  */
+}
+
+link.addEventListener("click", handleLinkClick);
+
+// h1요소 가리킴
 const greeting = document.querySelector("#greeting");
 
+// 일반적으로 string만 포함된 변수는 대문자로 표기한다
+// string을 저장하고 싶을 때 사용한다
+// loginForm이나 loginInput처럼 중요한 정보를 담은것이 아니라 대문자로 표기한다
+// 중요하지 않지만 반복적으로 사용되는 이름은 변수로 사용해주면 오타의 위험을 줄일 수 잇다
 const HIDDEN_CLASSNAME = "hidden";
-const USERNAME_KEY = "username";
+const USERNAME_KEY = "username"; // localStorage에 저장할 key
 
+/* onLoginSubmit역할
+form이 submit되었을 때 브라우저가 새로고침을 하지 못하도록 막고 loginForm을 안보이도록 한다
+localStorage에 username을 저장하고 
+paintGreetings함수를 호출한다: h1요소의 contents로 `Hello ${username}`를 추가하고 해당 요소가 보여지도록 한다
+*/
 function onLoginSubmit(event) {
-  event.preventDefault();
-  loginForm.classList.add(HIDDEN_CLASSNAME);
-  const username = loginInput.value;
-  localStorage.setItem(USERNAME_KEY, username);
+  event.preventDefault(); // 기본동작 STOP
+  loginForm.classList.add(HIDDEN_CLASSNAME); // submit한 다음, "hidden" class명 추가 (= form 안보여지도록 함)
+  const username = loginInput.value; // username을 변수로 만들어서
+  localStorage.setItem(USERNAME_KEY, username); // localStorage: username을 기억할 수 있도록 브라우저에서 기본적으로 제공하는 API
   paintGreetings(username);
 }
-
+/* paintGreetings 역할
+h1요소의 contents로 `Hello ${username}`를 추가하고 해당 요소가 보여지도록 한다
+-> onLoginSubmit함수에서나 하단의 조건문에서 반복적으로 사용되기 때문에 함수로 만들었다
+*/
 function paintGreetings(username) {
-  greeting.innerText = `Hello ${username}`;
-  greeting.classList.remove(HIDDEN_CLASSNAME);
+  greeting.innerText = `Hello ${username}`; // h1요소에 내용추가
+  greeting.classList.remove(HIDDEN_CLASSNAME); // h1요소 보이도록 class명 삭제
 }
 
+// localStorage에 저장된 username value
 const savedUsername = localStorage.getItem(USERNAME_KEY);
 
+/* localStorage에 저장된 username이 없다면 초기상태로 돌려주고
+그렇지 않다면 h1요소를 보여준다 */
 if (savedUsername === null) {
+  // show the form
   loginForm.classList.remove(HIDDEN_CLASSNAME);
   loginForm.addEventListener("submit", onLoginSubmit);
 } else {
+  // show the username
   paintGreetings(savedUsername);
 }
