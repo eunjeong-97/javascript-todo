@@ -29,7 +29,30 @@ function deleteToDo(event) {
   // 화면상에서 toDoList 삭제
   li.remove();
   /* === localStorage에 있는 toDos array에서 item 지우는 법 ===
-  
+  실제로는 array에서 요소를 빼는 것이 아니라 제외하고 싶은 요소를 제외하고 새로운 array를 만들어서 대체하는 것이다
+  `fliter에 들어가는 함수`
+    - `ture를 리턴`하면 -> 그 요소는 새로운 array에 포함되고
+    - `false를 리턴`하게 되면 -> 그 요소는 새로운 array에 포함되지 않는다
+  즉, JavaScript가 `filter안에 있는 함수` 를 요소의 개수 `array.length` 만큼 호출된다
+
+  [1,2,3,4].filter(sexyFilter)
+
+  ```
+  sexyFilter 함수에서 ture면 유지하게 된다
+  sexyFilter(1) = 1
+  sexyFilter(2) = 2
+  sexyFilter(3) = 3
+  sexyFilter(4) = 4
+  ```
+
+  만약 false라면 포함되지 않는다
+  ```
+  function sexyFilter(item) return item !== 3
+  sexyFilter(1) = 1
+  sexyFilter(2) = 2
+  sexyFilter(3) ❌
+  sexyFilter(4) = 4
+  ```
   */
   toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
   saveToDos(); // localStorage의 toDos 업데이트 (array -> string)
